@@ -9,3 +9,6 @@ tenzor-test
   * возможно что-то еще
 
 Сегодня рассчитываю все это исправить. Хех.
+
+Компилировал так:
+$ clang -std=c++11 -lstdc++ -lcurl -lxml2 trim.o main.cpp
