@@ -40,10 +40,14 @@ char *rtrim(char *string, size_t len) {
 
 char *trim(const char *string) {
 	size_t len = strlen(string);
-	// if( len < 2 ) return NULL;
+	if( !len ) return NULL;
+	
 	char *t_string = strdup(string);
 	t_string = ltrim(t_string, len);
 	t_string = rtrim(t_string, len);
+	
+	len = strlen(t_string);
+	if( !len ) { free(t_string); return NULL; }
+	
 	return t_string;
-	// return ltrim( rtrim( strdup(string), len ), len );
 }

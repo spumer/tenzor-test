@@ -115,6 +115,7 @@ void Document::dataRecieved(void * document, const xmlChar * ch, int len) {
 				if(pDoc->m_url.size() > 2) {	// 2 is '[' + ']'
 					(pDoc->m_parentStack.top()).m_Content.append( pDoc->m_url );
 					(pDoc->m_parentStack.top()).m_Links += pDoc->m_url.size();
+					pDoc->m_url.clear();
 				}
 			}
 			(pDoc->m_parentStack.top()).m_Content.append(trimStr);

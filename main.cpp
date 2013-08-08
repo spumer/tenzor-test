@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <cstdio>
+#include <fstream>
 
 #include "node.hpp"
 #include "universal.hpp"
@@ -41,6 +41,8 @@ int main(int argc, char *argv[]) {
 		(const xmlChar *)"ul",
 		(const xmlChar *)"li",
 		(const xmlChar *)"b",
+		(const xmlChar *)"strong",
+		(const xmlChar *)"span",
 		(const xmlChar *)"i",
 		(const xmlChar *)"em",
 		(const xmlChar *)"pre",
@@ -68,9 +70,10 @@ int main(int argc, char *argv[]) {
 	utf8::iterator<const xmlChar*> u8_word = u8_it;
 	
 	
-	size_t lineLen = 0;
+	size_t lineLen = 1;
 	for(; u8_it != u8_end; ++lineLen, ++u8_it) {
 		switch(*u8_it) {
+			case '\t':
 			case ' ':
 				u8_word = u8_it;
 				break;
@@ -79,15 +82,16 @@ int main(int argc, char *argv[]) {
 				lineLen = 0;
 				break;
 		}
-		if(lineLen == 80) {
+		if(lineLen >= 80 && *u8_word != '\n') {
 			(*(xmlChar*)u8_word.base()) = '\n';
-			lineLen = 0;
+			lineLen = utf8::distance(u8_word.base(), u8_it.base());
 		}
 	}
 	
-	FILE *file = fopen("article.content", "w+");
-	fprintf(file, "%s", str);
-	fclose(file);	
+	ofstream("article.content") << article.c_str();
+	// FILE *file = fopen("article.content", "w+");
+	// fprintf(file, "%s", str);
+	// fclose(file);
 	
 	long code = conn.retCode();
 	
