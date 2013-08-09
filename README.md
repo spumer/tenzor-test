@@ -2,7 +2,7 @@ tenzor-test
 ===========
 <h4>Тестовое задание для компании Tenzor. Универсальный парсер контента, как правило нацеленный на новостные сайты.</h4>
 
-$ gcc -std=c99 -c trim.c
+$ gcc -std=c99 -c trim.c<br>
 $ g++ trim.o main.cpp -static-libgcc -std=c++11 -lstdc++ -lcurl -lxml2 -O2 -ffast-math -mfpmath=sse -fschedule-insns -fsched-pressure
 
 **Краткое описание.**
